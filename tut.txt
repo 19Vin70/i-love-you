@@ -1,0 +1,39 @@
+# Step 1: Get a GitHub token with 'repo' permission at https://github.com/settings/tokens
+#        Set the note as 'anything'
+
+# Step 2: Paste the secret token here: https://github.com/username/repo/settings/secrets/actions/new
+#         Set the Name as 'API_TOKEN_GITHUB' and paste the secret token in Secrets*
+
+# Step 3: Open terminal
+cd ~/.ssh
+
+# Step 4: Generate a new SSH key with Ed25519 algorithm and add your GitHub email
+ssh-keygen -t ed25519 -C "yourgithubemail@example.com"
+
+# Step 5: Display the public key and copy its content
+cat id_ed25519.pub
+
+# Step 6: Paste the public key here: github.com/settings/ssh/new
+#         Set title as 'Anything' and paste the code inside the .pub file as the key.
+
+# Step 7: Configure your Git user email and name globally
+git config --global user.email "youremail@example.com"
+git config --global user.name "yourusername"
+
+# Step 8: Clone the GitHub repository
+git clone git@github.com:gituser/repo
+
+# Step 9: Add all files inside the 'magic' folder to the repository, ensuring you modify everything
+cd repo/repo
+git add .
+git commit -m "New Changes"
+git push origin master
+
+# Step 10: Make the 'gen.sh' script executable
+chmod +x gen.sh
+
+# Step 11: Run the script
+./gen.sh
+
+# Step 12: Force push the changes to GitHub
+git push origin --force
